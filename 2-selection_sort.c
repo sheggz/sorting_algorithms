@@ -35,7 +35,7 @@ void selection_sort(int *array, size_t size)
 	unsigned int i, unsorted_start_idx, smallest_num_idx = 0;
 	int smallest_num;
 
-	if (array == NULL || size == 0)
+	if (array == NULL || size < 2)
 		return;
 	/* keep track of the beginning idx of the unsorted part of d array */
 	unsorted_start_idx = 0;
@@ -58,7 +58,7 @@ void selection_sort(int *array, size_t size)
 		 */
 		for (i = unsorted_start_idx; i < size; i++)
 		{
-			if (array[i] <= smallest_num)
+			if (array[i] < smallest_num)
 			{
 				/* store smallest val and note d idx */
 				smallest_num = array[i];

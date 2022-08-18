@@ -13,7 +13,7 @@ void quick_sort(int *array, size_t size)
 {
 	/* int lo = size - size, hi = size - 1; */
 	/* check for valid entries */
-	if (array == NULL || size == 0 || size == 1)
+	if (array == NULL || size < 2)
 		return;
 	quick_sort_recur(array, size - size, size - 1, size);
 }
@@ -56,7 +56,7 @@ void quick_sort_recur(int *array, int lo, int hi, size_t size)
 		 * if element is less than pivot, place it towards begining
 		 * of the array
 		 */
-		if (array[i] <= pivot)
+		if (array[i] < pivot)
 		{
 			lower_than_pivot++;
 			/*
