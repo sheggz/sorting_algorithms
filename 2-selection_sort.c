@@ -31,8 +31,9 @@
  */
 void selection_sort(int *array, size_t size)
 {
-	/* set swap counter to a non zero value */
-	unsigned int i, unsorted_start_idx, smallest_num_idx = 0;
+	/* set
+	 * ;ik swap counter to a non zero value */
+	size_t i, unsorted_start_idx, smallest_num_idx;
 	int smallest_num;
 
 	if (array == NULL || size < 2)
@@ -42,39 +43,45 @@ void selection_sort(int *array, size_t size)
 	/* assume the smallest number is the first in the array */
 	smallest_num = array[unsorted_start_idx];
 	/*
-	 * if start idx of the unsorted part of the array is size-1
-	 * then only 1 element is unsorted. and that element is in its right
-	 * position
+	 * WHEN start idx of the unsorted part of the array is size-1
+	 * then only 1 element (LAST element of the array) is unsorted. and
+	 * that element is in its right position
 	 */
-
+	/*
+	 * we pass though the entire "unsorted" array from 0 - (size - 2).
+	 * the size of the unsorted part of the array reduces per pass
+	 * since one element is placed in its right position on each pass
+	 * on each pass
+	 * we compare the elemwnt we are on, with all other elements after it
+	 * searching for any element smaller than the one we are on
+	 */
 	while (unsorted_start_idx < size - 1)
 	{
 		/*
-		 * once we have some elements unsorted, we pass through the
-		 * array sorting the array from the left - one element at
-		 * a time
-		 * d size of d unsorted part of d array reduces per pass
-		 * as unsorted_start_idx increases per pass
+		 * on each pass we compare the element we are on, with all
+		 * other elements AFTER the one in focus.
 		 */
-		for (i = unsorted_start_idx; i < size; i++)
+		for (i = unsorted_start_idx + 1; i < size; i++)
 		{
+			/* check for a possible "new smallest number" */
 			if (array[i] < smallest_num)
 			{
-				/* store smallest val and note d idx */
+				/* if we find a new smallest num,store its */
+				/* val and note its idx */
 				smallest_num = array[i];
 				smallest_num_idx = i;
 			}
 		}
 		/**
-		 *  AFTER EACH PASS, WE SWAP smallest digit found in unsorted
-		 * array with the digit at the first element of the "unsorted"
-		 * part of the array
+		 * if a new smallest number is found, we swap this number with
+		 * the one initially assumed
 		 */
-
-		array[smallest_num_idx] = array[unsorted_start_idx];
-		/* increment unsorted_start_idx per swap */
-		array[unsorted_start_idx] = smallest_num;
+		if (array[unsorted_start_idx] != smallest_num)
+		{
+			array[smallest_num_idx] = array[unsorted_start_idx];
+			array[unsorted_start_idx] = smallest_num;
+			print_array(array, size);
+		}
 		smallest_num = array[++unsorted_start_idx];
-		print_array(array, size);
 	}
 }
